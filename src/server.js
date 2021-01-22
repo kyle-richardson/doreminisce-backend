@@ -1,15 +1,15 @@
-import express from "express"
-import bodyParser from "body-parser"
-import {promises as fs} from "fs"
-import {people} from "./data"
+import express from 'express'
+import bodyParser from 'body-parser'
+import { promises as fs } from 'fs'
+import { people } from './data'
 
-let port = 3500
-let server = express();
+const port = 3500
+const server = express();
 
 server.use(bodyParser.json())
 
 server.get('/test', (req, res) => {
-    res.send("Test success")
+    res.send('Test success')
 })
 
 server.get('/people', (req, res) => {
@@ -17,16 +17,16 @@ server.get('/people', (req, res) => {
 })
 
 server.get('/file-data', async (req, res) => {
-    let data = await fs.readFile(__dirname + '/people-data.json')
+    const data = await fs.readFile(`${__dirname}/people-data.json`)
     const people = JSON.parse(data)
 
     res.json(people)
 })
 
 server.get('/people/:name', (req, res) => {
-    const {name} = req.params;
+    const { name } = req.params;
 
-    const person = people.find(ele => ele.name.toLowerCase() === name.toLowerCase())
+    const person = people.find((ele) => ele.name.toLowerCase() === name.toLowerCase())
     res.json(person)
 })
 
