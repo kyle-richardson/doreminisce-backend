@@ -2,7 +2,7 @@ import express from 'express'
 import {getChart} from 'billboard-top-100'
 const configureMiddleware = require("./server-middleware.js");
 
-// const port = 3500
+const port = process.env.PORT || 3500
 const server = express();
 configureMiddleware(server);
 
@@ -19,6 +19,6 @@ server.get('/chart/:date', (req, res) => { //date format: 'YYYY-MM-DD'
     
 })
 
-// server.listen(port, () => {
-//     console.log(`Server listening on port ==${port}==.`)
-// });
+server.listen(port, () => {
+    console.log(`Server listening on port ==${port}==.`)
+});
