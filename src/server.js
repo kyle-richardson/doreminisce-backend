@@ -35,6 +35,29 @@ server.get('/auth-spotify', (req, res) => {
         }))
 })
 
+server.get('/auth-search', (req, res) => {
+    const authOptions = {
+        method: 'post',
+        url:'https://accounts.spotify.com/api/token',
+        params: {
+            client_id: clientId,
+            client_secret: clientSecret,
+            grant_type :'client_credentials',
+        },
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+    axios(authOptions)
+    .then(token => {
+        const access_token = token.data.access_token
+        res.json(access_token)
+    })
+    .catch(e=> {
+        res.json({err: e.response.data})
+    });
+})
+
 server.get('/callback', (req, res) =>{
     const code = req.query.code || null
     const authOptions = {
