@@ -28,7 +28,7 @@ server.get('/auth-spotify', (req, res) => {
     res.redirect("https://accounts.spotify.com/authorize?" + 
         querystring.stringify({
             client_id: clientId,
-            // scope: 'user-read-private user-read-email',
+            scope: 'playlist-modify-public playlist-modify-private',
             response_type: 'code',
             redirect_uri: redirectURI
         }))
