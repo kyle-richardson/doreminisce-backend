@@ -2,12 +2,11 @@ import express from 'express'
 import {getChart} from 'billboard-top-100'
 import {redirectURI, clientId, clientSecret, frontEnd} from "../config"
 const querystring = require('querystring');
-const https = require('https')
 const axios = require('axios')
 
 const configureMiddleware = require("./server-middleware.js");
 
-const port = process.env.PORT || 5500
+const port = process.env.PORT || 5500 //heroku adds port on deploy
 const server = express();
 configureMiddleware(server);
 
@@ -15,8 +14,9 @@ server.get('/', (req, res) => {
     res.send('API running')
 })
 
-server.get('/chart/:date', (req, res) => { //date format: 'YYYY-MM-DD'
-    const { date } = req.params;
+//getChart will not work directly on front end, because it is not CORS enabled.
+server.get('/chart/:date', (req, res) => { 
+    const { date } = req.params; //date format: 'YYYY-MM-DD'
     getChart('hot-100', date, (err, ch) => {
         if (err) res.json({error: err})
         else res.json(ch)
@@ -24,7 +24,8 @@ server.get('/chart/:date', (req, res) => { //date format: 'YYYY-MM-DD'
     
 })
 
-server.get('/auth-spotify', (req, res) => {
+//OAuth 2.0 flow, per spotify api docs
+server.get('/auth-spotify', (req, res) => { 
     res.redirect("https://accounts.spotify.com/authorize?" + 
         querystring.stringify({
             client_id: clientId,
