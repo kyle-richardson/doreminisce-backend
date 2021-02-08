@@ -1,6 +1,7 @@
 import express from 'express'
 import {getChart} from 'billboard-top-100'
 import {redirectURI, clientId, clientSecret, frontEnd} from "../config"
+import moment from "moment"
 const querystring = require('querystring');
 const axios = require('axios')
 
@@ -17,7 +18,10 @@ server.get('/', (req, res) => {
 //getChart will not work directly on front end, because it is not CORS enabled.
 server.get('/chart/:date', (req, res) => { 
     const { date } = req.params; //date format: 'YYYY-MM-DD'
-    getChart('hot-100', date, (err, ch) => {
+    const prevSaturday = new Date(date)
+    prevSaturday.setDate(prevSaturday.getDate() - (prevSaturday.getDay()+1) % 7)
+    const formattedPrevSat = moment(prevSaturday).format('YYYY-MM-DD')
+    getChart('hot-100', formattedPrevSat, (err, ch) => {
         if (err) res.json({error: err})
         else res.json(ch)
     })
