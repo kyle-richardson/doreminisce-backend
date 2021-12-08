@@ -25,7 +25,6 @@ server.get('/chart/:date', (req, res) => {
     prevSaturday.setDate(prevSaturday.getDate() - (prevSaturday.getDay() + 1) % 7)
     const formattedPrevSat = moment(prevSaturday).format('YYYY-MM-DD')
     getChart('hot-100', formattedPrevSat, (err, ch) => {
-        console.log(ch)
         if (err) res.json({ songs: [], error: err })
         else res.json(ch)
     })
