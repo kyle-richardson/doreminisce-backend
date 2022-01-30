@@ -1,5 +1,5 @@
 import express from 'express'
-import { getChart } from 'billboard-top-100'
+import { getChart } from 'bb-top-100'
 import moment from 'moment'
 import {
     redirectURI, clientId, clientSecret, frontEnd,

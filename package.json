@@ -11,7 +11,7 @@
     "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "axios": "^0.21.1",
-    "billboard-top-100": "^2.5.9",
+    "bb-top-100": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint-plugin-immutable": "^1.0.0",
