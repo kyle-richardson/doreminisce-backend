@@ -1,5 +1,5 @@
 import express from 'express'
-import { getChart } from 'bb-top-100'
+import { getChart } from 'billboard-top-100'
 import moment from 'moment'
 import {
     redirectURI, clientId, clientSecret, frontEnd,
@@ -8,7 +8,7 @@ import {
 const querystring = require('querystring');
 const axios = require('axios')
 
-const configureMiddleware = require('./server-middleware.js');
+const configureMiddleware = require('./server-middleware');
 
 const port = process.env.PORT || 5500 // heroku adds port on deploy
 const server = express();
