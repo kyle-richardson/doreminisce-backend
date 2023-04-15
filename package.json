@@ -1,7 +1,7 @@
 {
   "name": "doreminisce-backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "start": "yarn nodemon --exec \"yarn babel-node ./src/server.js\""
   },
